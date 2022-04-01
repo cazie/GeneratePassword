@@ -116,12 +116,37 @@ body {
 }
 /*custom button*/
 .btn-mycolor {
-    background-color: #818b35;
-    border-color: #818b35;
-    color: #dff3e4;
+    background-color: #fff;
+    border-color: darkred;
+    color: darkred;
 }
 
-    .btn-mycolor:hover {
-        background-color: #dff3e4;
-        color: #818b35;
-    }
+.btn-mycolor:hover {
+    background-color: darkred;
+    color: #ffffff;
+}
+
+#result{
+    color: black;
+}
+
+#generate {
+  
+    width: 50%;
+  
+    border: solid;
+    background-color: rgba(0, 0, 0, .05);
+    color: darkred;
+    font-size: 15px;
+    cursor: pointer;
+    outline: solid;
+}
+
+#generate:hover {
+    background-color: #fff;
+    color: darkred;
+}
+
+.lead{
+    color:darkred
+}
