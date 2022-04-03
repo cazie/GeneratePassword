@@ -22,9 +22,9 @@ namespace GeneratePassword.Helpers
             Random rand = new Random();
 
             string output = "";
-            int minCaps = 2;
-            int minSymbols = 2;
-            int minNumbers = 2;
+            int minCaps = 1;
+            int minSymbols = 1;
+            int minNumbers = 1;
             if (Caps == true)
             {
                 output += GetCaps(minCaps);

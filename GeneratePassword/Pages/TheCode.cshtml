@@ -13,48 +13,123 @@
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-lg-8">
                 <pre class="line-numbers">
-                <code class="language-javascript">
-                        public string GeneratePassword(int maxLen, bool Caps, bool Symb, bool numbs)
-                        {
+                    <code class="language-javascript">
 
+                        //removed the "at" symbol from strings - PRISM solution
+                        public static string GeneratePassword(int maxLen, bool Caps, bool Symb, bool numbs)
+                        {
+                        string selectCombined = "abcdefghijklmnopqrstuvwxyz!#$%&*)(1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                         string selectCharacters = "abcdefghijklmnopqrstuvwxyz";
                         string symbs = "!#$%&*)(!#$%&*)(";
                         string numbers = "12345678901234567890";
 
 
-                        string selectChoice = "";
-
+                        // string selectChoice = "";
 
                         Random rand = new Random();
 
                         string output = "";
+                        int minCaps = 1;
+                        int minSymbols = 1;
+                        int minNumbers = 1;
                         if (Caps == true)
                         {
-                        selectCharacters += selectCharacters.ToUpper();
+                        output += GetCaps(minCaps);
 
                         }
 
                         if (Symb == false)
                         {
                         symbs = "";
-
+                        }
+                        else
+                        {
+                        output += GetSymbols(minSymbols);
                         }
 
                         if (numbs == false)
                         {
                         numbers = "";
                         }
-                        selectChoice = selectCharacters + symbs + numbers;
-
-                        for (int i = 0; i < maxLen; i++)
+                        else
                         {
+                        output += GetNumbers(minNumbers);
+                        }
 
-                        int num = rand.Next(selectChoice.Length);
+                        int minRemaining = maxLen - (output.Length);
 
-                        output += selectChoice[num];
+                        output += GetRemaining(minRemaining);
 
+
+                        // The random number sequence
+                        Random num = new Random();
+
+                        // Create new string from the reordered char array
+                        string outputFinal = new string(output.ToCharArray()
+                        .OrderBy(s => (num.Next(2) % 2) == 0).ToArray());
+
+                        return outputFinal;
+                        }
+
+                        private static string GetSymbols(int minSymbols)
+                        {
+                        string output = "";
+                        string symbols = "!#$%&*)(";
+                        Random randSymbols = new Random();
+
+
+                        for (int i = 0; i < minSymbols; i++)
+                        {
+                        int numSymbols = randSymbols.Next(symbols.Length);
+                        output += symbols[numSymbols];
                         }
                         return output;
+                        }
+
+                        private static string GetNumbers(int minNumbers)
+                        {
+                        string output = "";
+                        string numbers = "1234567890";
+                        Random randNumbers = new Random();
+
+
+                        for (int i = 0; i < minNumbers; i++)
+                        {
+                        int numNumbers = randNumbers.Next(numbers.Length);
+                        output += numbers[numNumbers];
+                        }
+                        return output;
+                        }
+
+                        private static string GetCaps(int minCaps)
+                        {
+                        string selectCharacters = "abcdefghijklmnopqrstuvwxyz";
+                        string output = "";
+                        string caps = selectCharacters.ToUpper();
+                        Random randCaps = new Random();
+
+
+                        for (int i = 0; i < minCaps; i++)
+                        {
+                        int numCaps = randCaps.Next(caps.Length);
+                        output += caps[numCaps];
+                        }
+                        return output; //XX
+                        }
+                        private static string GetRemaining(int minRem)
+                        {
+                        string selectCombined = "abcdefghijklmnopqrstuvwxyz!#$%&*)(1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        string output = "";
+
+                        Random randRem = new Random();
+
+
+                        for (int i = 0; i < minRem; i++)
+                        {
+                        int numCaps = randRem.Next(selectCombined.Length);
+                        output += selectCombined[numCaps];
+                        }
+                        return output; //XX
                         }
 
                     </code>
@@ -62,9 +137,24 @@
 
             </div>
             <div class="col-lg-4">
-                <p>the Code is stuctured in in several functions.</p>
                 <h5>Password Generator</h5>
                 <p>Generate Strong Passwords</p>
+                <p>the Code is stuctured in in several functions, pulling each character sector separately.</p>
+                <p>Serveral approaches</p>
+                <p>
+                    Can combine all character types BUT it is not always a guarnatee that a Cap, number or symbol will be selected. As the Randomization process does
+                    not distinguish whether to select a number, letter or symbol.
+                </p>
+                <p>Creating separate random results for each character sector ensures that at least 1 cap, symbol, number is selected</p>
+                <p>If opt not to include the "Musts" means that these characters can still be in te result as the overall pool has ALL characters</p>
+                <h6>Possible Enhancements</h6>
+                <ul>
+                    <li>Check Strength</li>
+                    <li>Choice of # in character sector</li>
+                    <li>Place password in the clipboard</li>
+                    <li>Make prettier</li>
+                </ul>
+
             </div>
         </div>
     </div>
