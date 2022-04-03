@@ -31,35 +31,28 @@ namespace GeneratePassword.Helpers
 
             }
 
-            if (Symb == false)
-            {
-                symbs = "";
-            }
-            else
+            if (Symb)
             {
                 output += GetSymbols(minSymbols);
             }
+           
 
-            if (numbs == false)
-            {
-                numbers = "";
-            }
-            else
+            if (numbs)
             {
                 output += GetNumbers(minNumbers);
             }
-            
+         
+
             int minRemaining = maxLen - (output.Length);
             
             output += GetRemaining(minRemaining);
 
-
-            // The random number sequence
-            Random num = new Random();
+            Random randAll = new Random();
 
             // Create new string from the reordered char array
+            //https:///stackoverflow.com/questions/4739903/shuffle-string-c-sharp
             string outputFinal = new string(output.ToCharArray()
-                .OrderBy(s => (num.Next(2) % 2) == 0).ToArray());
+                .OrderBy(s => (randAll.Next(2) % 2) == 0).ToArray());
 
             return outputFinal;
         }
