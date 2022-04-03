@@ -11,19 +11,13 @@ namespace GeneratePassword.Pages
 {
     public class PasswordGeneratorModel : PageModel
     {
-        //private readonly GeneratorHelper _passwordGenHelper;
-
-        //public PasswordGeneratorModel(GeneratorHelper passwordGenHelper)
-        //{
-        //    _passwordGenHelper = passwordGenHelper;
-        //}
-
+       
         [BindProperty(SupportsGet = true)]
         public PasswordGenModel Generator { get; set; }
        
         public void OnGet()
         {
-
+            Generator.MaxLength = 10;
         }
 
         public IActionResult OnPost()

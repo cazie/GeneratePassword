@@ -11,14 +11,6 @@ namespace GeneratePassword.Helpers
 
         public static string GeneratePassword(int maxLen, bool Caps, bool Symb, bool numbs)
         {
-            string selectCombined = "abcdefghijklmnopqrstuvwxyz!@#$%&*)(1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string selectCharacters = "abcdefghijklmnopqrstuvwxyz";
-            string symbs = "!@#$%&*)(!@#$%&*)(";
-            string numbers = "12345678901234567890";
-
-
-           // string selectChoice = "";
-
             Random rand = new Random();
 
             string output = "";
