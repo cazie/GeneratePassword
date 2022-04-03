@@ -11,12 +11,12 @@ namespace GeneratePassword.Pages
 {
     public class PasswordGeneratorModel : PageModel
     {
-        private readonly GeneratorHelper _passwordGenHelper;
+        //private readonly GeneratorHelper _passwordGenHelper;
 
-        public PasswordGeneratorModel(GeneratorHelper passwordGenHelper)
-        {
-            _passwordGenHelper = passwordGenHelper;
-        }
+        //public PasswordGeneratorModel(GeneratorHelper passwordGenHelper)
+        //{
+        //    _passwordGenHelper = passwordGenHelper;
+        //}
 
         [BindProperty(SupportsGet = true)]
         public PasswordGenModel Generator { get; set; }
@@ -34,7 +34,7 @@ namespace GeneratePassword.Pages
                 return Page();
             }
 
-            Generator.GeneratedPassword = _passwordGenHelper.GeneratePassword(Generator.MaxLength, Generator.UseCaps, Generator.UseSymb, Generator.UseNumbers);
+            Generator.GeneratedPassword = GeneratorHelper.GeneratePassword(Generator.MaxLength, Generator.UseCaps, Generator.UseSymb, Generator.UseNumbers);
 
 
             return Page();
