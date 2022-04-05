@@ -71,7 +71,6 @@ body {
 }
 
 /*--------------------------passwordGen form styles*------------------------*/
-
 .loanForm {
     background-color: rgb(231,231,231)
 }
@@ -118,6 +117,7 @@ body {
 .btn-mycolor {
     background-color: #fff;
     border-color: darkred;
+    border: solid;
     color: darkred;
 }
 

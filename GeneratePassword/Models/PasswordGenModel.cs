@@ -25,4 +25,11 @@ namespace GeneratePassword.Models
 
 
     }
+
+    //public enum Strength
+    //{
+    //    Weak,
+    //    Medium,
+    //    Strong
+    //}
 }

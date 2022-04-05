@@ -67,6 +67,29 @@ namespace GeneratePassword.Helpers
             }
             return hasUpper && hasLower && hasDigit;
         }
+
+        public static bool GetStrength(string password)
+        {
+            bool hasLower = false; bool hasUpper = false; bool hasSymbol = false; bool hasDigit = false;
+            for (int i = 0; i < password.Length; i++)
+            {
+                hasUpper = Char.IsUpper(password[i]);
+                hasDigit = Char.IsDigit(password[i]);
+                hasLower = Char.IsLower(password[i]);
+                hasSymbol = ContainsSpecialChars(password[i].ToString());
+
+            }
+            
+            return hasUpper && hasSymbol && hasDigit & hasLower;
+
+        }
+
+        private static bool ContainsSpecialChars(string value)
+        {
+            char[] symbolList = { '!','@','#','$','%','&','*',')','(' };
+            return symbolList.Any(value.Contains);
+        }
+
         private static string GetSymbols(int minSymbols)
         {
             string output = "";
