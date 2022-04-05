@@ -64,6 +64,7 @@ namespace GeneratePassword.Helpers
                 if (!hasUpper) hasUpper = char.IsUpper(c);
                 if (!hasLower) hasLower = char.IsLower(c);
                 if (!hasDigit) hasDigit = char.IsDigit(c);
+
             }
             return hasUpper && hasLower && hasDigit;
         }
@@ -80,7 +81,7 @@ namespace GeneratePassword.Helpers
 
             }
             
-            return hasUpper && hasSymbol && hasDigit & hasLower;
+            return hasUpper && hasSymbol && hasDigit && hasLower;
 
         }
 
