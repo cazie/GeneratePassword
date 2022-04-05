@@ -33,11 +33,13 @@ namespace GeneratePassword.Helpers
             {
                 output += GetNumbers(minNumbers);
             }
-         
 
+       
             int minRemaining = maxLen - (output.Length);
             
             output += GetRemaining(minRemaining);
+
+           
 
             Random randAll = new Random();
 
@@ -46,9 +48,25 @@ namespace GeneratePassword.Helpers
             string outputFinal = new string(output.ToCharArray()
                 .OrderBy(s => (randAll.Next(2) % 2) == 0).ToArray());
 
+           
+
+
             return outputFinal;
         }
 
+
+        public static bool IsStrong(string password)
+        {
+            bool hasUpper = false; bool hasLower = false; bool hasDigit = false;
+            for (int i = 0; i < password.Length && !(hasUpper && hasLower && hasDigit); i++)
+            {
+                char c = password[i];
+                if (!hasUpper) hasUpper = char.IsUpper(c);
+                if (!hasLower) hasLower = char.IsLower(c);
+                if (!hasDigit) hasDigit = char.IsDigit(c);
+            }
+            return hasUpper && hasLower && hasDigit;
+        }
         private static string GetSymbols(int minSymbols)
         {
             string output = "";

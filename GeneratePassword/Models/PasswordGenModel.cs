@@ -13,6 +13,8 @@ namespace GeneratePassword.Models
         //public string Symbols { get; set; }
         public int MaxLength { get; set; }
 
+        public bool IsStrong { get; set; }
+
         public string GeneratedPassword { get; set; }
 
         public bool UseCaps { get; set; }
