@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace GeneratePassword.Helpers
 {
@@ -27,19 +28,19 @@ namespace GeneratePassword.Helpers
             {
                 output += GetSymbols(minSymbols);
             }
-           
+
 
             if (numbs)
             {
                 output += GetNumbers(minNumbers);
             }
 
-       
+
             int minRemaining = maxLen - (output.Length);
-            
+
             output += GetRemaining(minRemaining);
 
-           
+
 
             Random randAll = new Random();
 
@@ -48,7 +49,7 @@ namespace GeneratePassword.Helpers
             string outputFinal = new string(output.ToCharArray()
                 .OrderBy(s => (randAll.Next(2) % 2) == 0).ToArray());
 
-           
+
 
 
             return outputFinal;
@@ -106,7 +107,7 @@ namespace GeneratePassword.Helpers
         {
             string selectCombined = "abcdefghijklmnopqrstuvwxyz!@#$%&*)(1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string output = "";
-           
+
             Random randRem = new Random();
 
 
@@ -133,6 +134,51 @@ namespace GeneratePassword.Helpers
             }
             return hasUpper && hasLower && hasDigit;
         }
+
+
+        public static Strength StrengthOfPassword(string password)
+        {
+            Strength output = Strength.Weak;
+
+            bool hasALower = false;
+            bool hasAnUpper = false;
+            bool hasANumber = false;
+            bool hasASymbol = false;
+
+            var hasNumber = new Regex(".*[0-9].*");
+            var hasUpperChar = new Regex(".*[A-Z].*");
+            var hasLowerChar = new Regex(".*[a-z].*");
+            var hasSymbolChar = new Regex(".*[!@#$%&*)(].*");
+
+
+            hasALower = hasLowerChar.IsMatch(password);
+            hasAnUpper = hasUpperChar.IsMatch(password);
+            hasANumber = hasNumber.IsMatch(password);
+            hasASymbol = hasSymbolChar.IsMatch(password);
+
+            if (hasAnUpper && hasANumber && hasALower && hasASymbol)
+            {
+                return Strength.Strong;
+            }
+            else if (!hasANumber && !hasAnUpper || !hasANumber && !hasASymbol || !hasANumber && !hasALower || !hasALower && !hasAnUpper || !hasALower && !hasASymbol 
+                || !hasASymbol && !hasAnUpper) 
+            {
+                return Strength.Weak;
+            }
+
+            else if (!hasASymbol || !hasAnUpper || !hasANumber || !hasALower)
+            {
+                return Strength.Medium;
+            }
+
+
+            return output;
+        }
+
+
+
+
+
 
         public static bool GetStrength(string password)
         {

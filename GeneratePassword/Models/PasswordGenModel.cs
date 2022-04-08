@@ -13,7 +13,7 @@ namespace GeneratePassword.Models
         //public string Symbols { get; set; }
         public int MaxLength { get; set; }
 
-        public bool IsStrong { get; set; }
+        public Strength IsStrong { get; set; }
 
         public string GeneratedPassword { get; set; }
 
@@ -26,10 +26,10 @@ namespace GeneratePassword.Models
 
     }
 
-    //public enum Strength
-    //{
-    //    Weak,
-    //    Medium,
-    //    Strong
-    //}
+    public enum Strength
+    {
+        Weak,
+        Medium,
+        Strong
+    }
 }

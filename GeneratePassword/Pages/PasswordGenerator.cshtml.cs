@@ -29,7 +29,7 @@ namespace GeneratePassword.Pages
             }
 
             Generator.GeneratedPassword = GeneratorHelper.GeneratePassword(Generator.MaxLength, Generator.UseCaps, Generator.UseSymb, Generator.UseNumbers);
-         
+            Generator.IsStrong = GeneratorHelper.StrengthOfPassword(Generator.GeneratedPassword);
 
             return Page();
         }
