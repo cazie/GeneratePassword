@@ -119,23 +119,6 @@ namespace GeneratePassword.Helpers
             return output; //XX
         }
 
-        // future refactoring
-
-        public static bool IsStrong(string password)
-        {
-            bool hasUpper = false; bool hasLower = false; bool hasDigit = false;
-            for (int i = 0; i < password.Length && !(hasUpper && hasLower && hasDigit); i++)
-            {
-                char c = password[i];
-                if (!hasUpper) hasUpper = char.IsUpper(c);
-                if (!hasLower) hasLower = char.IsLower(c);
-                if (!hasDigit) hasDigit = char.IsDigit(c);
-
-            }
-            return hasUpper && hasLower && hasDigit;
-        }
-
-
         public static Strength StrengthOfPassword(string password)
         {
             Strength output = Strength.Weak;
@@ -175,26 +158,6 @@ namespace GeneratePassword.Helpers
             return output;
         }
 
-
-
-
-
-
-        public static bool GetStrength(string password)
-        {
-            bool hasLower = false; bool hasUpper = false; bool hasSymbol = false; bool hasDigit = false;
-            for (int i = 0; i < password.Length; i++)
-            {
-                hasUpper = Char.IsUpper(password[i]);
-                hasDigit = Char.IsDigit(password[i]);
-                hasLower = Char.IsLower(password[i]);
-                hasSymbol = ContainsSpecialChars(password[i].ToString());
-
-            }
-
-            return hasUpper && hasSymbol && hasDigit && hasLower;
-
-        }
 
         private static bool ContainsSpecialChars(string value)
         {

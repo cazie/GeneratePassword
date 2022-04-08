@@ -127,37 +127,45 @@
                         return output; //XX
                         }
 
-                        // future refactoring
-
-                        public static bool IsStrong(string password)
+                        public static Strength StrengthOfPassword(string password)
                         {
-                        bool hasUpper = false; bool hasLower = false; bool hasDigit = false;
-                        for (int i = 0; i < password.Length && !(hasUpper && hasLower && hasDigit); i++)
+                        Strength output = Strength.Weak;
+
+                        bool hasALower = false;
+                        bool hasAnUpper = false;
+                        bool hasANumber = false;
+                        bool hasASymbol = false;
+
+                        var hasNumber = new Regex(".*[0-9].*");
+                        var hasUpperChar = new Regex(".*[A-Z].*");
+                        var hasLowerChar = new Regex(".*[a-z].*");
+                        var hasSymbolChar = new Regex(".*[!@#$%&*)(].*");
+
+
+                        hasALower = hasLowerChar.IsMatch(password);
+                        hasAnUpper = hasUpperChar.IsMatch(password);
+                        hasANumber = hasNumber.IsMatch(password);
+                        hasASymbol = hasSymbolChar.IsMatch(password);
+
+                        if (hasAnUpper && hasANumber && hasALower && hasASymbol)
                         {
-                        char c = password[i];
-                        if (!hasUpper) hasUpper = char.IsUpper(c);
-                        if (!hasLower) hasLower = char.IsLower(c);
-                        if (!hasDigit) hasDigit = char.IsDigit(c);
-
+                        return Strength.Strong;
                         }
-                        return hasUpper && hasLower && hasDigit;
-                        }
-
-                        public static bool GetStrength(string password)
+                        else if (!hasANumber && !hasAnUpper || !hasANumber && !hasASymbol || !hasANumber && !hasALower || !hasALower && !hasAnUpper || !hasALower && !hasASymbol
+                        || !hasASymbol && !hasAnUpper)
                         {
-                        bool hasLower = false; bool hasUpper = false; bool hasSymbol = false; bool hasDigit = false;
-                        for (int i = 0; i < password.Length; i++)
+                        return Strength.Weak;
+                        }
+
+                        else if (!hasASymbol || !hasAnUpper || !hasANumber || !hasALower)
                         {
-                        hasUpper = Char.IsUpper(password[i]);
-                        hasDigit = Char.IsDigit(password[i]);
-                        hasLower = Char.IsLower(password[i]);
-                        hasSymbol = ContainsSpecialChars(password[i].ToString());
-
+                        return Strength.Medium;
                         }
 
-                        return hasUpper && hasSymbol && hasDigit && hasLower;
 
+                        return output;
                         }
+
 
                         private static bool ContainsSpecialChars(string value)
                         {
